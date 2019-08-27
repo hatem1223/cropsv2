@@ -1,0 +1,30 @@
+<form autocomplete="off" novalidate [formGroup]="formGroup" (ngSubmit)="save()">
+  <mat-dialog-content style="width:800px;height:300px;">
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <h1 mat-dialog-title>{{ isEditing ? 'Edit Account' : 'Create Account' | localize }}</h1>
+        <mat-form-field>
+          <input id="accountName" placeholder="Account Name" matInput type="text"
+            formControlName="accountName" />
+          <mat-error *ngIf="hasError('accountName', 'required')">Account Name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('accountName', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="descriptions" placeholder="Account Description" matInput type="text"
+            formControlName="descriptions" />
+          <mat-error *ngIf="hasError('descriptions', 'required')">Account Description is required
+          </mat-error>
+          <mat-error *ngIf="hasError('descriptions', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <br />
+        <div mat-dialog-actions>
+            <button mat-flat-button color="primary">{{isEditing ? 'Save' : 'Create'}}</button>
+            <button mat-flat-button onclick="location.href = '/home'">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>  
+</form>

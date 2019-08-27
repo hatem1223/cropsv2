@@ -1,0 +1,53 @@
+<form autocomplete="off" novalidate [formGroup]="formGroup" (ngSubmit)="save()">
+  <mat-dialog-content style="width:800px;height:300px;">
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <h1 mat-dialog-title>Configure Project</h1>
+        <mat-form-field>
+          <mat-label>Project</mat-label>
+          <mat-select (selectionChange)="projectddlChange($event)" formControlName="projectId" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let project of Projects" [value]="project.id">
+              {{project.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('projectId', 'required')">Please choose an Project</mat-error>
+          <!--<mat-hint>{{animalControl.value?.sound}}</mat-hint>-->
+        </mat-form-field>
+        <mat-form-field>
+          <input id="optimisticIteration" placeholder="Optimistic Final Iteration" matInput type="number"
+            min = "1" [max] = "staticMaxInt" formControlName="optimisticIteration"
+            [attr.disabled] = "!ProjectDetailModel? true : null" />
+          <mat-error *ngIf="hasError('optimisticIteration', 'max') && ProjectDetailModel">Optimistic Final Iteration should be less than 500000
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="pessimisticIteration" placeholder="Pessimistic Final Iteration" matInput type="number"
+            min = "1" [max] = "staticMaxInt" formControlName="pessimisticIteration"
+            [attr.disabled] = "!ProjectDetailModel? true : null" />
+          <mat-error *ngIf="hasError('pessimisticIteration', 'max') && ProjectDetailModel">Pessimistic Final Iteration should be less than 500000
+          </mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field>
+          <input id="descriptions" placeholder="Descriptions" matInput type="text" formControlName="descriptions" />
+          <mat-error *ngIf="hasError('descriptions', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+          <mat-error *ngIf="hasError('descriptions', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field> -->
+        <mat-form-field>
+          <textarea matInput id="descriptions" placeholder="Descriptions" formControlName="descriptions"
+          [attr.disabled] = "!ProjectDetailModel? true : null"></textarea>
+          <mat-error *ngIf="hasError('descriptions', 'maxlength')"> Max length is 500. </mat-error>
+        </mat-form-field>
+
+        <!-- fileupload -->
+        <app-file-uploader *ngIf="ProjectDetailModel" (onUploadFinished)="uploadFinished($event)" [baseServerUrl]="baseServerUrl" [originalFileUrl]="originalFileUrl" [newFileName]="ProjectDetailModel.projectId"></app-file-uploader>
+
+        <div mat-dialog-actions>
+          <button mat-flat-button color="primary" [disabled]="!formGroup.valid">Save</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</form>

@@ -1,0 +1,128 @@
+<form autocomplete="off" novalidate [formGroup]="formGroup" (ngSubmit)="save()">
+  <mat-dialog-content style="width:800px;height:300px;">
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <h1 mat-dialog-title>{{ isEditing ? 'Edit Project' : 'Create Project' | localize }}</h1>
+
+          <mat-slide-toggle id="isOnPremProject" [checked]="true" (change)="toggle($event)">{{projectType}}</mat-slide-toggle>
+      
+        <mat-form-field>
+          <input id="projectName" placeholder="project Name" matInput type="text"
+            formControlName="projectName" />
+          <mat-error *ngIf="hasError('projectName', 'required')">project Name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('projectName', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field *ngIf="!isOnPremProjectFlag">
+            <input id="onlineTfsCollectionUri" placeholder="Collection Uri" matInput type="text"
+              formControlName="onlineTfsCollectionUri" />
+            <mat-error *ngIf="hasError('onlineTfsCollectionUri', 'required')">User Name is required
+            </mat-error>
+            <mat-error *ngIf="hasError('onlineTfsCollectionUri', 'maxlength')">You have more than 50 characters
+            </mat-error>
+            <mat-error *ngIf="hasError('onlineTfsCollectionUri', 'pattern')">Must be Link
+              </mat-error>
+          </mat-form-field>
+
+        <mat-form-field *ngIf="!isOnPremProjectFlag">
+            <input id="userName" placeholder="User Name" matInput type="text"
+              formControlName="userName" />
+            <mat-error *ngIf="hasError('userName', 'required')">User Name is required
+            </mat-error>
+            <mat-error *ngIf="hasError('userName', 'maxlength')">You have more than 50 characters
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="!isOnPremProjectFlag">
+            <mat-label>Authentication Type</mat-label>
+            <mat-select formControlName="authType" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let authTyp of authTypies" [value]="authTyp.id">
+                {{authTyp.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasError('authType', 'required')">Please choose an Authentication Type</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field *ngIf="!isOnPremProjectFlag">
+            <input id="password" placeholder="Password" matInput type="password"
+              formControlName="password" />
+            <mat-error *ngIf="hasError('password', 'required')">password is required
+            </mat-error>
+            <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 50 characters
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field *ngIf="!isOnPremProjectFlag">
+            <input matInput [matDatepicker]="fromDatePicker" id="fromDate" placeholder="From Date"
+              matInput formControlName="fromDate" />
+            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromDatePicker></mat-datepicker>
+            <mat-error *ngIf="hasError('fromDate', 'required')">From Date is required
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field *ngIf="!isOnPremProjectFlag">
+            <input matInput [matDatepicker]="toDatePicker" id="toDate" placeholder="To Date"
+              matInput formControlName="toDate" />
+            <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #toDatePicker></mat-datepicker>
+            <mat-error *ngIf="hasError('toDate', 'required')">To Date is required
+            </mat-error>
+          </mat-form-field>
+
+
+
+
+        <mat-form-field *ngIf="isOnPremProjectFlag">
+          <input id="collectionName" placeholder="Collection Name" matInput type="text"
+            formControlName="collectionName" />
+          <mat-error *ngIf="hasError('collectionName', 'required')">project Name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('collectionName', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="isOnPremProjectFlag">
+            <input id="releaseName" placeholder="Release Name" matInput type="text"
+              formControlName="releaseName" />
+            <mat-error *ngIf="hasError('releaseName', 'required')">project Name is required
+            </mat-error>
+            <mat-error *ngIf="hasError('releaseName', 'maxlength')">You have more than 50 characters
+            </mat-error>
+          </mat-form-field>
+
+
+        <mat-form-field>
+          <mat-label>Account</mat-label>
+          <mat-select formControlName="accountId" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let account of accounts" [value]="account.accountId">
+              {{account.accountName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('accountId', 'required')">Please choose an account</mat-error>
+        </mat-form-field>
+        
+        
+        <mat-form-field>
+          <input id="workspaceName" placeholder="Workspace Name" matInput type="text"
+            formControlName="workspaceName" />
+          <mat-error *ngIf="hasError('workspaceName', 'required')">Workspace Name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('workspaceName', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+
+        <br />
+        <div mat-dialog-actions>
+          <button mat-flat-button color="primary">{{isEditing ? 'Save' : 'Create'}}</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>  
+</form> 

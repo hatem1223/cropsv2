@@ -1,0 +1,17 @@
+<div [@routerTransition]>
+
+    <div mat-dialog-actions class="right">
+        <a class="mat-flat-button mat-primary" mat-flat-button routerLink="create">Create</a>
+    </div>
+
+    <div class="block-header">
+        <h1 mat-dialog-title>Project Details</h1>
+    </div>
+
+    <app-grid (getRows)="getAll($event)"
+              (deleteRow)="onDeleteRow($event)"
+              (editRow)="onEditRow($event)"
+              [isItemDeleted]="isItemDeleted"
+              [columnDefs]="columnDefs">
+    </app-grid>
+</div>

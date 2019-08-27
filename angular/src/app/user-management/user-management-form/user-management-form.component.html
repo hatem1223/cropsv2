@@ -1,0 +1,73 @@
+<form autocomplete="off" novalidate [formGroup]="formGroup" (ngSubmit)="save()">
+  <mat-dialog-content style="width:800px;height:300px;">
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <h1 mat-dialog-title>{{ isEditing ? 'Edit User' : 'Create User' | localize }}</h1>
+        <mat-form-field>
+          <input id="firstName" placeholder="First Name" matInput type="text" formControlName="firstName" />
+          <mat-error *ngIf="hasError('firstName', 'required')">First Name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('firstName', 'maxlength')">You have more than 128 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="lastName" placeholder="Last Name" matInput type="text" formControlName="lastName" />
+          <mat-error *ngIf="hasError('lastName', 'required')">Last Name is required
+          </mat-error>
+          <mat-error *ngIf="hasError('lastName', 'maxlength')">You have more than 128 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="email" placeholder="Email" matInput type="text" formControlName="email" />
+          <mat-error *ngIf="hasError('firstName', 'required')">Email is required
+          </mat-error>
+          <mat-error *ngIf="hasError('firstName', 'email')">Email format is not valid
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="roleName">
+            <mat-option *ngFor="let role of roles" [value]="role.name">{{role.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('roleName', 'required')">role is required
+          </mat-error>
+          <mat-error *ngIf="hasError('roleName', 'EmptyRole')">role is empty
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="!this.isEditing">
+          <input id="password" type="password" placeholder="Password" matInput formControlName="password" />
+          <mat-error *ngIf="hasError('password', 'required')">Password is required
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 50 characters
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">You have less than 8 characters
+          </mat-error>
+          <!-- <mat-error *ngIf="hasError('password', 'ConfirmPassword')">Your password and confirmation password do not
+            match
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field *ngIf="!this.isEditing">
+          <input id="confirmPassword" type="password" placeholder="Confirm Password*" matInput
+            formControlName="confirmPassword" />
+          <mat-error *ngIf="hasError('confirmPassword', 'required')">Confirmation Password is required
+          </mat-error>
+          <mat-error *ngIf="hasError('confirmPassword', 'maxlength')">You have more than 50 characters
+          </mat-error>
+          <mat-error *ngIf="hasError('confirmPassword', 'minlength')">You have less than 8 characters
+          </mat-error>
+          <mat-error *ngIf="hasError('confirmPassword', 'ConfirmPassword')">Your password and confirmation password do
+            not
+            match
+          </mat-error>
+
+
+        </mat-form-field>
+        <br />
+        <div mat-dialog-actions>
+          <button mat-flat-button color="primary"
+            [disabled]="!formGroup.valid">{{isEditing ? 'Save' : 'Create'}}</button>
+            <button mat-flat-button color="primary" (click)="cancel('/app/users')" style="margin: 5">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</form>

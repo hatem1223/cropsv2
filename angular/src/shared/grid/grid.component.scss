@@ -1,0 +1,8 @@
+ag-grid-angular {
+    .ag-cell {
+        &.action-cell {
+            padding: 0 5px !important;
+            text-align: center;
+        }
+    }
+}

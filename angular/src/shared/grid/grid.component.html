@@ -1,0 +1,18 @@
+<ag-grid-angular #agGrid
+                 (gridReady)="onGridReady($event)"
+                 [getRowNodeId]="getRowNodeId"
+                 [animateRows]="true"
+                 [columnDefs]="columnDefs"
+                 [context]="context"
+                 [defaultColDef]="defaultColDef"
+                 [floatingFilter]="false"
+                 [frameworkComponents]="frameworkComponents"
+                 [pagination]="true"
+                 [paginationPageSize]="paginationPageSize"
+                 [rowDeselection]="true"
+                 [rowModelType]="rowModelType"
+                 [style.height.px]="height"
+                 [style.width.%]="width"
+                 class="ag-theme-material"
+                 >
+</ag-grid-angular>

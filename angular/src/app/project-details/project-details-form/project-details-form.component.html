@@ -1,0 +1,80 @@
+<form autocomplete="off" novalidate [formGroup]="formGroup" (ngSubmit)="save()">
+  <mat-dialog-content style="width:800px;height:300px;">
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <h1 mat-dialog-title>{{ isEditing ? 'Edit Project' : 'Create Project' | localize }}</h1>
+        <input id="id" placeholder="id" formControlName="id" type="hidden" />
+        <mat-form-field>
+          <input id="projectId" placeholder="projectId" matInput type="text" formControlName="projectId" />
+          <mat-error *ngIf="hasError('projectId', 'required')">projectId is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="optimisticIteration" placeholder="Optimistic Final Iteration" matInput type="text"
+            formControlName="optimisticIteration" />
+          <mat-error *ngIf="hasError('optimisticIteration', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+          <mat-error *ngIf="hasError('optimisticIteration', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="pessimisticIteration" placeholder="Pessimistic Final Iteration" matInput type="text"
+            formControlName="pessimisticIteration" />
+          <mat-error *ngIf="hasError('pessimisticIteration', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+          <mat-error *ngIf="hasError('pessimisticIteration', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="creationDatePicker" id="creationDate" placeholder="Creation Date" matInput
+            formControlName="creationDate" />
+          <mat-datepicker-toggle matSuffix [for]="creationDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #creationDatePicker></mat-datepicker>
+          <mat-error *ngIf="hasError('creationDate', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="scope" placeholder="Scope" matInput type="text" formControlName="scope" />
+          <mat-error *ngIf="hasError('scope', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+          <mat-error *ngIf="hasError('scope', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="logo" placeholder="Logo" matInput type="text" formControlName="logo" />
+          <mat-error *ngIf="hasError('logo', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+          <mat-error *ngIf="hasError('logo', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="descriptions" placeholder="Descriptions" matInput type="text" formControlName="descriptions" />
+          <mat-error *ngIf="hasError('descriptions', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+          <mat-error *ngIf="hasError('descriptions', 'maxlength')">You have more than 50 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="pullDataFromDatePicker" id="pullDataFromDate"
+            placeholder="Pull Data From Date" matInput formControlName="pullDataFromDate" />
+          <mat-datepicker-toggle matSuffix [for]="pullDataFromDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #pullDataFromDatePicker></mat-datepicker>
+          <mat-error *ngIf="hasError('pullDataFromDate', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="pullDataToDatePicker" id="pullDataToDate" placeholder="Pull Data To Date"
+            matInput formControlName="pullDataToDate" />
+          <mat-datepicker-toggle matSuffix [for]="pullDataToDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #pullDataToDatePicker></mat-datepicker>
+          <mat-error *ngIf="hasError('pullDataToDate', 'required')">Optimistic Final Iteration is required
+          </mat-error>
+        </mat-form-field>
+        <br />
+        <div mat-dialog-actions>
+          <button mat-flat-button color="primary">{{isEditing ? 'Save' : 'Create'}}</button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</form>
